@@ -1,3 +1,6 @@
+# DevOps & Automation (Group-4) - Capstone Project
+
+
 # Cloud-Native Notes Application: End-to-End DevOps Pipeline
 
 [![CI/CD Pipeline](https://img.shields.io/badge/CI%2FCD-Jenkins%20%7C%20GitHub%20Actions-blue.svg)](./Jenkinsfile)
