@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Sign In - Cloud Notes{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-body p-4 p-md-5">
+                    <div class="text-center mb-4">
+                        <div class="avatar-icon bg-primary-subtle text-primary mx-auto mb-3 rounded-circle d-flex align-items-center justify-content-center" style="width: 64px; height: 64px;">
+                            <i class="bi bi-shield-lock-fill fs-2"></i>
+                        </div>
+                        <h3 class="fw-bold">Sign In</h3>
+                        <p class="text-muted small">Access your cloud-synced notes anywhere</p>
+                    </div>
+
+                    <form method="POST" action="{{ url_for('web.login_view') }}">
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold small text-muted">Username</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0"><i class="bi bi-person"></i></span>
+                                <input type="text" name="username" class="form-control border-start-0 ps-0" placeholder="e.g. demo" required autofocus>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold small text-muted">Password</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0"><i class="bi bi-key"></i></span>
+                                <input type="password" name="password" class="form-control border-start-0 ps-0" placeholder="••••••••" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 py-2 rounded-3 fw-semibold shadow-sm">
+                            <i class="bi bi-box-arrow-in-right me-1"></i> Sign In
+                        </button>
+                    </form>
+
+                    <div class="card bg-light border-0 mt-4 p-3 rounded-3 small">
+                        <div class="d-flex align-items-center gap-2 mb-1 text-primary fw-semibold">
+                            <i class="bi bi-info-circle-fill"></i> Default Demo Credentials:
+                        </div>
+                        <div class="text-muted">Username: <code>demo</code> | Password: <code>demo123</code></div>
+                        <div class="text-muted">Username: <code>admin</code> | Password: <code>admin123</code></div>
+                    </div>
+
+                    <div class="text-center mt-4 text-muted small">
+                        Don't have an account? <a href="{{ url_for('web.register_view') }}" class="text-primary fw-semibold">Create one now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

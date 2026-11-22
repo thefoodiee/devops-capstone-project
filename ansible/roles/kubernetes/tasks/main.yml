@@ -1,0 +1,16 @@
+---
+- name: Ensure Kubernetes directory exists
+  file:
+    path: /etc/kubernetes
+    state: directory
+    mode: '0755'
+
+- name: Check kubectl command availability
+  command: which kubectl
+  register: kubectl_check
+  ignore_errors: yes
+
+- name: Display kubectl status
+  debug:
+    msg: "kubectl is installed at {{ kubectl_check.stdout }}"
+  when: kubectl_check.rc == 0

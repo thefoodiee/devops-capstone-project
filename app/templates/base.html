@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Cloud Notes - DevOps Capstone Project{% endblock %}</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="bg-light d-flex flex-column min-vh-100">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="{{ url_for('web.dashboard') if session.get('user_id') else url_for('web.login_view') }}">
+                <i class="bi bi-journal-bookmark-fill fs-4 text-warning"></i>
+                <span>Cloud Notes</span>
+                <span class="badge bg-light text-primary rounded-pill fs-7 ms-1">v1.0</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center gap-2">
+                    {% if session.get('user_id') %}
+                    <li class="nav-item">
+                        <span class="nav-link text-white-50">
+                            <i class="bi bi-person-circle"></i> <strong class="text-white">{{ user.username if user else 'User' }}</strong>
+                        </span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white-50" href="{{ url_for('api.health') }}" target="_blank" title="Health Check API">
+                            <i class="bi bi-heart-pulse-fill text-danger"></i> Health
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white-50" href="/metrics" target="_blank" title="Prometheus Metrics">
+                            <i class="bi bi-activity text-warning"></i> Metrics
+                        </a>
+                    </li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-outline-light btn-sm px-3 rounded-pill" href="{{ url_for('web.logout_view') }}">
+                            <i class="bi bi-box-arrow-right"></i> Logout
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{{ url_for('web.login_view') }}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-warning btn-sm px-3 rounded-pill fw-semibold" href="{{ url_for('web.register_view') }}">Register</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Flash Messages Container -->
+    <div class="container mt-3">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show shadow-sm" role="alert">
+                        <i class="bi bi-info-circle-fill me-2"></i>{{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <!-- Main Content -->
+    <main class="flex-grow-1">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer bg-white border-top py-3 mt-5">
+        <div class="container text-center text-muted small">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-md-start mb-2 mb-md-0">
+                    <strong>Cloud-Native Notes Application</strong> &bull; DevOps &amp; Automation Lab (ENSP461)
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <span class="badge bg-secondary-subtle text-secondary me-2">Docker</span>
+                    <span class="badge bg-secondary-subtle text-secondary me-2">Kubernetes</span>
+                    <span class="badge bg-secondary-subtle text-secondary me-2">Ansible</span>
+                    <span class="badge bg-secondary-subtle text-secondary me-2">Terraform</span>
+                    <span class="badge bg-secondary-subtle text-secondary">Prometheus</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

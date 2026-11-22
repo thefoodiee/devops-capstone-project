@@ -1,0 +1,13 @@
+---
+- name: End-to-End DevOps Infrastructure and Application Deployment
+  hosts: all
+  become: true
+  vars:
+    app_name: notes-app
+    k8s_namespace: notes-app
+
+  roles:
+    - docker
+    - kubernetes
+    - config
+    - app_deploy
