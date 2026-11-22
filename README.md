@@ -101,7 +101,7 @@ Notes App (3 Replicas)   PostgreSQL (PVC)        Ingress / NodePort
 
 ## One-Script Quickstart (Start Everything)
 
-The entire cloud-native stack (Application, PostgreSQL database, Prometheus metrics collection, and Grafana dashboard) starts with **a single command**:
+The entire cloud-native stack (Application, PostgreSQL database, Prometheus metrics collection, and Grafana dashboard) starts with a **single** command:
 
 ```bash
 ./start.sh
