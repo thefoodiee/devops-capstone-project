@@ -1,4 +1,4 @@
-# DevOps & Automation (Group-4) - Capstone Project
+# DevOps & Automation (Group-4): Capstone Project
 
 
 # Cloud-Native Notes Application: End-to-End DevOps Pipeline
